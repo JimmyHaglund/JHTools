@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+using UnityEngine;
 using UnityEditor;
 
 namespace JHTools {
@@ -20,3 +21,4 @@ namespace JHTools {
             protected abstract void AssignObjectReference(SerializedProperty property);
         }
 }
+#endif
