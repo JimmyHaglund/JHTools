@@ -9,6 +9,8 @@ namespace JHTools.Rapid {
         private PropertyExtraButton _extraButton = new PropertyExtraButton(TEXTUREID, TOOLTIP);
         private bool _useConstant = true;
         private bool _initialized = false;
+        
+        protected bool UseConstant => _useConstant;
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
             var useConstantProperty = property.FindPropertyRelative("_useConstant");
