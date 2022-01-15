@@ -1,6 +1,6 @@
 {
     "name": "com.jimmy-haglund.jhtools",
-    "version": "0.2.3",
+    "version": "0.3.3",
     "displayName": "JHTools",
     "description": "Various utility scripts & tools for development in Unity",
     "unity": "2019.4",
