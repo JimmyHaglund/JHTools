@@ -7,21 +7,22 @@ namespace JHTools.Rapid {
         private const string TEXTUREID = "DropDownEditButtonTexture";
         private const string TOOLTIP = "Switch between using a constant value or a Scriptable Object variable";
         private PropertyExtraButton _extraButton = new PropertyExtraButton(TEXTUREID, TOOLTIP);
-        private bool _useConstant = true;
         private bool _initialized = false;
+        private bool _useConstant;
         
-        protected bool UseConstant => _useConstant;
-
+        protected bool UseConstant { get => _useConstant; private set => _useConstant = value; }
+        protected bool UseVariable { get => !UseConstant; private set => UseConstant = !value; } 
+        
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
             var useConstantProperty = property.FindPropertyRelative("_useConstant");
             var useConstant = useConstantProperty.boolValue;
 
             if (!_initialized) {
-                _useConstant = useConstant;
+                UseConstant = useConstant;
                 _initialized = true;
             }
             DisplayConstantValueDropDownButton(_extraButton.SetPosition(position).LoadTexture(), useConstantProperty);
-            useConstantProperty.boolValue = _useConstant;
+            useConstantProperty.boolValue = UseConstant;
             DrawProperty(position, property, label, useConstant);
         }
 
@@ -52,17 +53,9 @@ namespace JHTools.Rapid {
 
         private GenericMenu MakeConstantValueSelectMenu(SerializedProperty useConstantProperty) {
             var menu = new GenericMenu();
-            menu.AddItem(new GUIContent("Use constant value"), _useConstant, UseConstant);
-            menu.AddItem(new GUIContent("Use variable"), !_useConstant, UseVariable);
+            menu.AddItem(new GUIContent("Use constant value"), UseConstant, UseConstant);
+            menu.AddItem(new GUIContent("Use variable"), !UseConstant, UseVariable);
             return menu;
-        }
-
-        private void UseConstant() {
-            _useConstant = true;
-        }
-
-        private void UseVariable() {
-            _useConstant = false;
         }
     }
 #endif
