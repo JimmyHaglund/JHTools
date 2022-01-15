@@ -5,7 +5,8 @@ using UnityEditor;
 namespace JHTools {
     public class PropertyExtraButton {
         private bool _textureLoaded = false;
-        private const int OFFSET = -20;
+        private const int BUTTONSIZE = 16;
+        private const int BUTTONOFFSET = -18;
         
         public GUIStyle Style { get; set; } = new GUIStyle();
         public GUIContent Content { get; set; } = null;
@@ -33,10 +34,10 @@ namespace JHTools {
 
         private Rect GetButtonRect(Rect propertyPosition) {
             var buttonPosition = new Vector2(GetButtonX(), propertyPosition.y);
-            var buttonSize = new Vector2(propertyPosition.height, propertyPosition.height);
-            return new Rect(buttonPosition, buttonSize);
+            var buttonDimensions = new Vector2(BUTTONSIZE, BUTTONSIZE);
+            return new Rect(buttonPosition, buttonDimensions);
 
-            float GetButtonX() => propertyPosition.x + EditorGUIUtility.labelWidth + OFFSET;
+            float GetButtonX() => propertyPosition.x + EditorGUIUtility.labelWidth + BUTTONOFFSET;
         }
     }
 }
