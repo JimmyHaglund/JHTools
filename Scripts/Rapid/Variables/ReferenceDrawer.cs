@@ -24,13 +24,21 @@ namespace JHTools.Rapid {
         }
 
         private void DrawProperty(Rect position, SerializedProperty property, GUIContent label, bool useConstant) {
-            var constantValue = property.FindPropertyRelative("_constantValue");
-            var variable = property.FindPropertyRelative("_variable");
             if (useConstant) {
-                EditorGUI.PropertyField(position, constantValue, label);
-            } else {
-                EditorGUI.PropertyField(position, variable, label);
+                var constantProperty = property.FindPropertyRelative("_constantValue");
+                DrawConstantProperty(position, constantProperty, label);
+                return;
             }
+            var variableProperty = property.FindPropertyRelative("_variable");
+            DrawVariableProperty(position, variableProperty, label);
+        }
+
+        private void DrawVariableProperty(Rect position, SerializedProperty property, GUIContent label) {
+            EditorGUI.PropertyField(position, property, label);
+        }
+
+        protected virtual void DrawConstantProperty(Rect position, SerializedProperty property, GUIContent label) {
+            EditorGUI.PropertyField(position, property, label);
         }
 
         private void DisplayConstantValueDropDownButton(PropertyExtraButton button, SerializedProperty constantProperty) {
