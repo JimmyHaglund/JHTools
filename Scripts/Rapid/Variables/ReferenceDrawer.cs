@@ -53,10 +53,13 @@ namespace JHTools.Rapid {
 
         private GenericMenu MakeConstantValueSelectMenu(SerializedProperty useConstantProperty) {
             var menu = new GenericMenu();
-            menu.AddItem(new GUIContent("Use constant value"), UseConstant, UseConstant);
-            menu.AddItem(new GUIContent("Use variable"), !UseConstant, UseVariable);
+            menu.AddItem(new GUIContent("Use constant value"), _useConstant, SetUseConstant);
+            menu.AddItem(new GUIContent("Use variable"), !_useConstant, SetUseVariable);
             return menu;
         }
+        
+        private void SetUseConstant() => UseConstant = true;
+        private void SetUseVariable() => UseVariable = true;
     }
 #endif
 }
