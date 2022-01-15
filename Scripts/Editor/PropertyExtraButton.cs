@@ -5,13 +5,14 @@ using UnityEditor;
 namespace JHTools {
     public class PropertyExtraButton {
         private bool _textureLoaded = false;
-
+        private const int OFFSET = -20;
+        
         public GUIStyle Style { get; set; } = new GUIStyle();
         public GUIContent Content { get; set; } = null;
         public string TextureId { get; set; }
         public string Tooltip { get; set; }
         public Rect Position { get; private set; }
-
+    
         public PropertyExtraButton(string textureId = "DropDownEditButtonTexture", string tooltip = "") {
             TextureId = textureId;
             Tooltip = tooltip;
@@ -35,7 +36,7 @@ namespace JHTools {
             var buttonSize = new Vector2(propertyPosition.height, propertyPosition.height);
             return new Rect(buttonPosition, buttonSize);
 
-            float GetButtonX() => propertyPosition.x + EditorGUIUtility.labelWidth - propertyPosition.height;
+            float GetButtonX() => propertyPosition.x + EditorGUIUtility.labelWidth + OFFSET;
         }
     }
 }
